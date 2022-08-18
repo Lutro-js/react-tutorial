@@ -1,7 +1,7 @@
-import { useState } from "react"
+import React,{ useState } from "react"
 import styles from "./InputComponent.css"
 
-export default function InputComponent() {
+export default function InputComponent(props) {
 
     const [title, setTitle] = useState('')
 
@@ -13,13 +13,20 @@ export default function InputComponent() {
     //保存ボタンのonClick用のメソッド
     const save = (e) => {
         e.preventDefault()
-        console.log(title)
+        props.addTodoItem(title)
+        setTitle('')
     }
     return (
         <form>
-            <h1>InputComponent</h1>
+        <ul className="title">
+        <h1>ToDoリスト</h1>
+        </ul>
+
+            <ul className="input">
+            <h2>InputComponent</h2>
             <input type="text" placeholder="タイトル" value={title} onChange={changeTitle}/>
             <button onClick={save}>保存</button>
+            </ul>
         </form>
     )
 }

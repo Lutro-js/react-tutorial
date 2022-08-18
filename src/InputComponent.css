@@ -1,0 +1,16 @@
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px 0;
+}
+.title {
+    color: cadetblue;
+    margin: 0%;
+}
+
+.input {
+    justify-content: center;
+    color: lightpink;
+    margin: 0%;
+}

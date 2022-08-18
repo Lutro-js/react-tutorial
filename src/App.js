@@ -11,9 +11,40 @@ import React, {useEffect, useState} from 'react'
 
 export default function App() {
   const [todoItems, setTodoItems] = useState([])
+    //0:すべて1:完了2:未完了
+  const [filterStatus, setFilterStatus] = useState(0)
   const addTodoItem = (title) => {
     setTodoItems([...todoItems,{id:todoItems.length+1, title:title, is_done:false}])
+  } 
+  
+  const updateStatusTodoItem = (id) => {
+    setTodoItems(todoItems.map(todoItem => {
+      if (todoItem.id === id) {
+          todoItem.is_done = !todoItem.is_done
+      }
+      return todoItem
+    }))
   }
+
+  const removeTodoItem = (id) => {
+    setTodoItems(todoItems.filter(todoItem => todoItem.id !== id))
+  }
+
+
+
+  return (
+    <div className="wrapper">
+      <InputComponent addTodoItem={addTodoItem}/>
+      <FilterComponent setFilterStatus={setFilterStatus}/> 
+      <ListComponent todoItems={todoItems} updateStatusTodoItem={updateStatusTodoItem} removeTodoItem={removeTodoItem} filterStatus={filterStatus}/>
+    </div>
+  )
+}
+
+
+
+
+
 
   /*useEffect(() => {
     (async () => {
@@ -27,17 +58,6 @@ export default function App() {
     })()
   },[])*/
   
-  return (
-      <div>
-        <InputComponent addTodoItem={addTodoItem}/>
-        <FilterComponent/>
-        <ListComponent todoItems={todoItems}/>
-      </div>
-  )
-}
-
-
-
 // function App() {
 //   return (
 //     <div className="App">
